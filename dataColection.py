@@ -37,6 +37,12 @@ while True:
             y = y - int(offsetH * 3)
             h = h + int(offsetH * 3.5)
 
+            # ---------------- avoid below 0 -----------------
+            if x < 0: x = 0
+            if y < 0: y = 0
+            if w < 0: w = 0
+            if h < 0: h = 0
+
             # ---------------- draw -----------------
             cv2.rectangle(img, (x, y, w, h), (255, 0, 0), 3)
 
