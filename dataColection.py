@@ -48,6 +48,18 @@ while True:
             cv2.imshow("face", imgFace)
             blurValue = cv2.Laplacian(imgFace, cv2.CV_64F).var()
 
+            # ---------------- Normalize Value -----------------
+            ih, iw, _ = img.shape
+            xc, yc = x + w / 2, y + h / 2
+            xcn, ycn = round(xc / iw, floatingNumber), round(yc / ih, floatingNumber)
+            wn, hn = round(w / iw, floatingNumber), round(h / ih, floatingNumber)
+
+            # ---------------- avoid above 1 -----------------
+            if xcn > 1: xcn = 1
+            if ycn > 1: ycn = 1
+            if wn > 1: wn = 1
+            if hn > 1: hn = 1
+
             # ---------------- draw -----------------
             cv2.rectangle(img, (x, y, w, h), (255, 0, 0), 3)
 
