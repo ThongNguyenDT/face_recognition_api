@@ -54,6 +54,10 @@ while True:
                 imgFace = img[y:y + h, x:x + w]
                 cv2.imshow("face", imgFace)
                 blurValue = cv2.Laplacian(imgFace, cv2.CV_64F).var()
+                if blurValue > blurThreshold:
+                    listBlur.append(True)
+                else:
+                    listBlur.append(False)
 
                 # ---------------- Normalize Value -----------------
                 ih, iw, _ = img.shape
