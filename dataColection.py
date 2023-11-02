@@ -2,7 +2,8 @@ import cvzone
 from cvzone.FaceDetectionModule import FaceDetector
 import cv2
 
-
+offsetPercentageW = 10
+offsetPercentageH = 20
 camW, camH = 640, 480
 floatingNumber = 6
 
@@ -26,6 +27,15 @@ while True:
             x, y, w, h = bbox['bbox']
             score = bbox["score"][0]
             # print(x, y, w, h)
+
+            # ----------------- add offset --------------------
+            offsetW = offsetPercentageW / 100 * w
+            x = x - int(offsetW)
+            w = w + int(offsetW * 2)
+
+            offsetH = offsetPercentageH / 100 * h
+            y = y - int(offsetH * 3)
+            h = h + int(offsetH * 3.5)
 
             # ---------------- draw -----------------
             cv2.rectangle(img, (x, y, w, h), (255, 0, 0), 3)
