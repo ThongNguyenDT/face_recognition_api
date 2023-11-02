@@ -3,7 +3,7 @@ from cvzone.FaceDetectionModule import FaceDetector
 import cv2
 
 confidence = 0.8
-
+save = True
 blurThreshold = 39
 
 offsetPercentageW = 10
@@ -59,6 +59,8 @@ while True:
                 else:
                     listBlur.append(False)
 
+
+
                 # ---------------- Normalize Value -----------------
                 ih, iw, _ = img.shape
                 xc, yc = x + w / 2, y + h / 2
@@ -75,6 +77,10 @@ while True:
                 cv2.rectangle(img, (x, y, w, h), (255, 0, 0), 3)
                 cvzone.putTextRect(img, f'Score: {int(score * 100)}% Blur: {blurValue}', (x, y - 20),
                                    scale=1, thickness=1)
+
+        if save:
+            if all(listBlur) and listBlur!=[]:
+                pass
 
     cv2.imshow("Image", img)
     cv2.waitKey(1)
